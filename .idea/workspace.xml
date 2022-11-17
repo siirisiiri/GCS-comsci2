@@ -59,7 +59,13 @@
       <option name="presentableId" value="LOCAL−00003" />
       <updated>1668699350933</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL−00004" summary="GCS - Grade Calculator and Saver">
+      <created>1668703997651</created>
+      <option name="number" value="LOCAL−00004" />
+      <option name="presentableId" value="LOCAL−00004" />
+      <updated>1668703997651</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

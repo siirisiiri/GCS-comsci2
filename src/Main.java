@@ -9,11 +9,10 @@ public class Main {
         System.out.println("[A to add a new student]");
         System.out.println("[G to add a grade or grades]");
         System.out.println("[P to print all the GPAs]");
-        System.out.println("[B to find the best student]");
         ArrayList<Student> students = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.print("Choose operation:  ");
+            System.out.print("Choose operation: ");
             String operation = scanner.next();
             if (operation.equals("Q")) { // toimii
                 System.out.println("Thank you for using GCS. Bye!");
@@ -33,35 +32,71 @@ public class Main {
                 {
                     GradesIP.add(scanner.nextInt());
                 }
-                // studentNameG.addGrade(GradesIP);
+                sortStudents(students);
+                if (findStudent(students, studentNameG) != null) {
+                    findStudent(students, studentNameG).addGrade(GradesIP);
+                }
+                else {
+                    System.out.println("You haven't added a student named " + studentNameG);
+                }
             }
             if (operation.equals("P")) { // toimii
                 for (Student s : students){
-                    System.out.println(s.getName() + ": " + s.getGrades() + "// GPA: " + s.GPA());
+                    System.out.println(s.getName() + ": " + s.getGrades() + " - GPA: " + s.GPA());
                 }
             }
-            if (operation.equals("B")) { // löydä paras oppilas
-                System.out.print("The best student is: ");
-            }
         }
     }
-    static void sortStudents (ArrayList<Student> studentlist){ // järjestää oppilaat nimen mukaiseen aakkosjärjestykseen
-        for (int i = 0; i < studentlist.size() - 1; i++){
-            int smindex = i;
-            for (int i = 0; i < studentlist.size(); i++){
-
-            }
+    static Student[] ListToArray (ArrayList<Student> studentList){
+        Student[] studentArray = new Student[studentList.size()];
+        for (int j = 0; j < studentList.size(); j++){
+            studentArray[j] = studentList.get(j);
+        }
+        return studentArray;
+    }
+    static void ArrayToList (Student[] studentArray, ArrayList<Student> studentList) {
+        for (int h = 0; h < studentArray.length; h++) {
+            studentList.set(h, studentArray[h]);
         }
     }
+    static void sortStudents (ArrayList<Student> studentList){ // järjestää oppilaat nimen mukaiseen aakkosjärjestykseen
+        Student[] studentArray = ListToArray(studentList);
+        for (int i = 0; i < studentArray.length - 1; i++){
+            int smallestIndex = i;
+            for (int k = i + 1; k < studentArray.length; k++){
+                if (studentArray[smallestIndex].Name.compareTo(studentArray[k].Name) > 0){
+                    smallestIndex = k;
+                }
+            }
+            if (i != smallestIndex) {
+                Student temporary = studentArray[smallestIndex];
+                studentArray[smallestIndex] = studentArray[i];
+                studentArray[i] = temporary;
+            }
+        }
+        ArrayToList(studentArray, studentList);
+    }
 
-    static Student findStudent (ArrayList<Student> studentlist, String name){ // etsii oikean oppilasolion nimen perusteella binäärihaulla
-
+    static Student findStudent (ArrayList<Student> studentList, String name){ // etsii oikean oppilasolion nimen perusteella binäärihaulla
+        sortStudents(studentList);
+        Student[] studentArray = ListToArray(studentList);
+        int h = 0;
+        for (int b = studentArray.length / 2; b >= 1; b /= 2){
+            while (h + b < studentArray.length && studentArray[h + b].Name.compareTo(name) <= 0){
+                h += b;
+            }
+        }
+        if (studentArray[h].Name.equals(name)){
+            return studentArray[h];
+        }
+        else
+            return null;
     }
 }
     class Student {
         public Student(String Name) {
             this.Name = Name;
-            ArrayList<Integer> Grades = new ArrayList<>();
+            this.Grades = new ArrayList<>();
         }
 
         public String getName () {
@@ -78,11 +113,16 @@ public class Main {
         }
 
         public double GPA() {
-            int sum = 0;
+            double sum = 0;
             for (int s : Grades) {
                 sum += s;
             }
-            return sum / Grades.size();
+            if (Grades.size() > 0) {
+                return sum / Grades.size();
+            }
+            else {
+                return sum / 1;
+            }
         }
 
         public String Name;
