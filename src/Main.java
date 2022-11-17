@@ -47,6 +47,7 @@ public class Main {
             }
         }
     }
+
     static Student[] ListToArray (ArrayList<Student> studentList){
         Student[] studentArray = new Student[studentList.size()];
         for (int j = 0; j < studentList.size(); j++){
@@ -54,11 +55,13 @@ public class Main {
         }
         return studentArray;
     }
+
     static void ArrayToList (Student[] studentArray, ArrayList<Student> studentList) {
         for (int h = 0; h < studentArray.length; h++) {
             studentList.set(h, studentArray[h]);
         }
     }
+
     static void sortStudents (ArrayList<Student> studentList){
         Student[] studentArray = ListToArray(studentList);
         for (int i = 0; i < studentArray.length - 1; i++){
