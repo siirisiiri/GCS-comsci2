@@ -14,16 +14,16 @@ public class Main {
         while (true) {
             System.out.print("Choose operation: ");
             String operation = scanner.next();
-            if (operation.equals("Q")) { // toimii
+            if (operation.equals("Q")) {
                 System.out.println("Thank you for using GCS. Bye!");
                 break;
             }
-            if (operation.equals("A")) {// constructor, luo uusi oppilas-olio // toimii
+            if (operation.equals("A")) {
                 System.out.print("Please give the name of the student: ");
                 String studentName = scanner.next();
                 students.add(new Student(studentName));
             }
-            if (operation.equals("G")) {// lisää uusi arvosana oppilas olioon // ei toimi
+            if (operation.equals("G")) {
                 System.out.print("Please give the name of the student: ");
                 String studentNameG = scanner.next();
                 System.out.print("Please add grades for the student: ['.' to end writing] ");
@@ -40,7 +40,7 @@ public class Main {
                     System.out.println("You haven't added a student named " + studentNameG);
                 }
             }
-            if (operation.equals("P")) { // toimii
+            if (operation.equals("P")) {
                 for (Student s : students){
                     System.out.println(s.getName() + ": " + s.getGrades() + " - GPA: " + s.GPA());
                 }
@@ -59,7 +59,7 @@ public class Main {
             studentList.set(h, studentArray[h]);
         }
     }
-    static void sortStudents (ArrayList<Student> studentList){ // järjestää oppilaat nimen mukaiseen aakkosjärjestykseen
+    static void sortStudents (ArrayList<Student> studentList){
         Student[] studentArray = ListToArray(studentList);
         for (int i = 0; i < studentArray.length - 1; i++){
             int smallestIndex = i;
@@ -77,7 +77,7 @@ public class Main {
         ArrayToList(studentArray, studentList);
     }
 
-    static Student findStudent (ArrayList<Student> studentList, String name){ // etsii oikean oppilasolion nimen perusteella binäärihaulla
+    static Student findStudent (ArrayList<Student> studentList, String name){
         sortStudents(studentList);
         Student[] studentArray = ListToArray(studentList);
         int h = 0;
