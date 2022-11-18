@@ -39,6 +39,7 @@ public class Main {
                 else {
                     System.out.println("You haven't added a student named " + studentNameG);
                 }
+                scanner.nextLine();
             }
             if (operation.equals("P")) {
                 for (Student s : students){
