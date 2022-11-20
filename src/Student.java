@@ -13,6 +13,7 @@ public class Student { // the class to contain all the data about students
     public ArrayList<Integer> getGrades () {
         return Grades;
     } // grade-getter
+
     public void addGrade(ArrayList<Integer> gradesIP){ // adds grades to student object
         for (Integer g : gradesIP){
             Grades.add(g); // adds the given grade from the parameter arraylist of grades to the arraylist of grades of this object
